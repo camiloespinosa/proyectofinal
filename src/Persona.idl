@@ -1,0 +1,9 @@
+module PersonaApp{
+    interface Persona{
+        boolean insertarPersona(in long id, in wstring nombre, in wstring apellido, in wstring direccion, in wstring genero, in wstring estado);
+        boolean eliminarPersona(in long id);
+        boolean actualizarPersona(in long id, in wstring nombre, in wstring apellido, in wstring direccion, in wstring genero, in wstring estado);
+        oneway void shutdown();
+    };
+
+};

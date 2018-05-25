@@ -1,0 +1,9 @@
+module EstadoApp{
+    interface Estado{
+        boolean insertarEstado(in long id, in wstring nombre);
+        boolean eliminarEstado(in long id);
+        boolean actualizarEstado(in long id, in wstring nombre);
+        oneway void shutdown();
+    };
+
+};
