@@ -14,7 +14,7 @@ public class Genero extends GeneroApp.GeneroPOA{
     public boolean insertarGenero(int id, String nombre) {
  boolean resultado = false;
         try {
-            String query = "Insert into genero(id_genero,nombre)"
+            String query = "Insert into genero(id,nombre)"
                     + "values ('"+id+"','"+nombre+"')";
             conex.conexion();
             Statement st = conex.conex.createStatement();

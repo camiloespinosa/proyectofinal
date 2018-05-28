@@ -28,7 +28,7 @@ public class InicioFrm extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnPersona = new javax.swing.JButton();
-        btnGnero = new javax.swing.JButton();
+        btnGenero = new javax.swing.JButton();
         btnEstado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,9 +44,19 @@ public class InicioFrm extends javax.swing.JFrame {
             }
         });
 
-        btnGnero.setText("Genero");
+        btnGenero.setText("Genero");
+        btnGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGeneroActionPerformed(evt);
+            }
+        });
 
         btnEstado.setText("estado");
+        btnEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,7 +70,7 @@ public class InicioFrm extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(btnPersona)
                 .addGap(62, 62, 62)
-                .addComponent(btnGnero)
+                .addComponent(btnGenero)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(btnEstado)
                 .addGap(29, 29, 29))
@@ -73,7 +83,7 @@ public class InicioFrm extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPersona)
-                    .addComponent(btnGnero)
+                    .addComponent(btnGenero)
                     .addComponent(btnEstado))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -82,8 +92,22 @@ public class InicioFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
-        // TODO add your handling code here:
+         PersonaFrm verFormularioPersona = new PersonaFrm();
+        verFormularioPersona.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnPersonaActionPerformed
+
+    private void btnEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoActionPerformed
+        EstadoFrm verFormularioEstado = new EstadoFrm();
+        verFormularioEstado.setVisible(true);
+        this.setVisible(false);                             
+    }//GEN-LAST:event_btnEstadoActionPerformed
+
+    private void btnGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneroActionPerformed
+        GeneroFrm verFormularioGenero = new GeneroFrm();
+        verFormularioGenero.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGeneroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,7 +146,7 @@ public class InicioFrm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEstado;
-    private javax.swing.JButton btnGnero;
+    private javax.swing.JButton btnGenero;
     private javax.swing.JButton btnPersona;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

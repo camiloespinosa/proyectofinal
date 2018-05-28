@@ -32,7 +32,7 @@
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="btnPersona" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-              <Component id="btnGnero" min="-2" max="-2" attributes="0"/>
+              <Component id="btnGenero" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="83" max="32767" attributes="0"/>
               <Component id="btnEstado" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -47,7 +47,7 @@
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnPersona" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnGnero" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnGenero" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="26" max="32767" attributes="0"/>
@@ -75,15 +75,21 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPersonaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnGnero">
+    <Component class="javax.swing.JButton" name="btnGenero">
       <Properties>
         <Property name="text" type="java.lang.String" value="Genero"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGeneroActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEstado">
       <Properties>
         <Property name="text" type="java.lang.String" value="estado"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEstadoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

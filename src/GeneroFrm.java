@@ -1,3 +1,8 @@
+
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +15,36 @@
  */
 public class GeneroFrm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GeneroFrm
-     */
+    private DefaultTableModel modeloTabla;
+    
     public GeneroFrm() {
+        modeloTabla = new DefaultTableModel(null, getColumn());
+        
         initComponents();
+        cargarTabla();
+    }
+    
+    //Se cargan las columnas a la tabla persona
+    private String[] getColumn(){
+        String columnas[] = new String[]{"Id", "Nombre"};
+        return columnas;
+    }   
+    
+    //Metodo para cargar la tabla
+    private void cargarTabla(){
+        Genero objGenero = new Genero();
+        ResultSet resultado = objGenero.cargarTablaGenero();
+        try {
+            Object datos[] = new Object[2];
+            while (resultado.next()){
+                for(int i=0; i<2; i++){
+                    datos[i] = resultado.getObject(i+1);
+                }
+                modeloTabla.addRow(datos);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrio un error: " + e.getMessage());
+        }
     }
 
     /**
@@ -48,16 +78,31 @@ public class GeneroFrm extends javax.swing.JFrame {
         btnActualizar.setBackground(new java.awt.Color(255, 0, 0));
         btnActualizar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setBackground(new java.awt.Color(255, 0, 0));
         btnEliminar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(txtIdentificacion);
 
         btnSalir.setBackground(new java.awt.Color(255, 0, 0));
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(txtNombre);
 
@@ -72,6 +117,11 @@ public class GeneroFrm extends javax.swing.JFrame {
         btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(51, 0, 51));
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jtGenero.setModel(modeloTabla);
         jtGenero.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,14 +183,52 @@ public class GeneroFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtGeneroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtGeneroMouseClicked
-        int selection = jtPersona.getSelectedRow();
-        txtIdentificacion.setText(String.valueOf(jtPersona.getValueAt(selection, 0)));
-        txtNombre.setText(String.valueOf(jtPersona.getValueAt(selection, 1)));
-        txtApellido.setText(String.valueOf(jtPersona.getValueAt(selection, 2)));
-        txtDireccion.setText(String.valueOf(jtPersona.getValueAt(selection, 3)));
-        modeloComboGenero.setSelectedItem(String.valueOf(jtPersona.getValueAt(selection, 4)));
-        modeloComboEstado.setSelectedItem(String.valueOf(jtPersona.getValueAt(selection, 5)));
+        int selection = jtGenero.getSelectedRow();
+        txtIdentificacion.setText(String.valueOf(jtGenero.getValueAt(selection, 0)));
+        txtNombre.setText(String.valueOf(jtGenero.getValueAt(selection, 1)));
     }//GEN-LAST:event_jtGeneroMouseClicked
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Genero per = new Genero();
+        boolean resultado = per.insertarGenero(Integer.parseInt(txtIdentificacion.getText()), txtNombre.getText());
+        if(resultado==true){
+            JOptionPane.showMessageDialog(null, "Se inserto el registro");
+            this.modeloTabla.getDataVector().clear();
+           cargarTabla();
+        }else{
+            JOptionPane.showMessageDialog(null, "No se inserto el registro");
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        Genero per = new Genero();
+        boolean resultado = per.actualizarGenero(Integer.parseInt(txtIdentificacion.getText()), txtNombre.getText());
+        if(resultado==true){
+            JOptionPane.showMessageDialog(null, "Se actualizo el registro");
+            this.modeloTabla.getDataVector().clear();
+           cargarTabla();
+        }else{
+            JOptionPane.showMessageDialog(null, "No se actualizo el registro");
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        Genero per = new Genero();
+        boolean resultado = per.eliminarGenero(Integer.parseInt(txtIdentificacion.getText()));
+        if(resultado==true){
+            JOptionPane.showMessageDialog(null, "Se elimino el registro");
+            this.modeloTabla.getDataVector().clear();
+           cargarTabla();
+        }else{
+            JOptionPane.showMessageDialog(null, "No se elimino el registro");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        InicioFrm verFormularioInicio = new InicioFrm();
+        verFormularioInicio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
